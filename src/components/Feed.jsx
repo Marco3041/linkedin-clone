@@ -65,6 +65,10 @@ function Feed() {
             (description && description.toLowerCase().includes(term));
     });
 
+    const handleInputOptionClick = (type) => {
+        alert(`This would open the ${type} upload dialog. (Simulated)`);
+    };
+
     return (
         <div className="feed">
             <div className="feed__inputContainer">
@@ -76,21 +80,23 @@ function Feed() {
                     </form>
                 </div>
                 <div className="feed__inputOptions">
-                    <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
-                    <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
-                    <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
-                    <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" />
+                    <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" onClick={() => handleInputOptionClick('Photo')} />
+                    <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" onClick={() => handleInputOptionClick('Video')} />
+                    <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" onClick={() => handleInputOptionClick('Event')} />
+                    <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" onClick={() => handleInputOptionClick('Article')} />
                 </div>
             </div>
 
             {/* Posts */}
-            {filteredPosts.map(({ id, data: { name, description, message, photoUrl } }) => (
+            {filteredPosts.map(({ id, data: { name, description, message, photoUrl, likes } }) => (
                 <Post
                     key={id}
+                    id={id}
                     name={name}
                     description={description}
                     message={message}
                     photoUrl={photoUrl}
+                    likes={likes || []}
                 />
             ))}
         </div>
