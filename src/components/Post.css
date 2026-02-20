@@ -3,6 +3,14 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 10px;
+    border: 1px solid var(--border-color, transparent);
+    animation: fadeIn 0.5s ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+.post:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
 .post__header {

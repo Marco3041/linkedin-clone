@@ -4,9 +4,11 @@ import { Avatar } from '@mui/material';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { collection, onSnapshot, getDocs, addDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { useSearch } from '../context/SearchContext';
 
 function Sidebar() {
     const { currentUser } = useAuth();
+    const { setSearchTerm } = useSearch();
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
@@ -46,7 +48,7 @@ function Sidebar() {
     };
 
     const recentItem = (topic) => (
-        <div className="sidebar__recentItem">
+        <div className="sidebar__recentItem" onClick={() => setSearchTerm(topic)} style={{ cursor: 'pointer' }}>
             <span className="sidebar__hash">#</span>
             <p>{topic}</p>
         </div>
@@ -81,17 +83,6 @@ function Sidebar() {
                 </Avatar>
                 <h2>{currentUser?.displayName}</h2>
                 <h4>{currentUser?.email}</h4>
-            </div>
-
-            <div className="sidebar__stats">
-                <div className="sidebar__stat">
-                    <p>Who viewed you</p>
-                    <p className="sidebar__statNumber">2,543</p>
-                </div>
-                <div className="sidebar__stat">
-                    <p>Views on post</p>
-                    <p className="sidebar__statNumber">2,448</p>
-                </div>
             </div>
 
             <div className="sidebar__bottom">

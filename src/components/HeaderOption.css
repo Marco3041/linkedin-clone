@@ -5,10 +5,12 @@
     margin-right: 20px;
     color: var(--icon-color);
     cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .headerOption:hover {
     color: var(--text-color);
+    transform: scale(1.05);
 }
 
 .headerOption__title {

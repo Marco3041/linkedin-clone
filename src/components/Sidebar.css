@@ -48,6 +48,13 @@
     background-color: var(--component-bg);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+.sidebar__stats:hover,
+.sidebar__bottom:hover,
+.sidebar__top:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar__stat {
@@ -74,6 +81,7 @@
     background-color: var(--component-bg);
     border-radius: 10px;
     margin-top: 10px;
+    transition: box-shadow 0.3s ease;
 }
 
 .sidebar__recentItem {
@@ -84,12 +92,13 @@
     cursor: pointer;
     margin-bottom: 5px;
     padding: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .sidebar__recentItem:hover {
-    background-color: whitesmoke;
+    background-color: var(--hover-color, whitesmoke);
     border-radius: 10px;
-    color: black;
+    color: var(--text-color, black);
 }
 
 .sidebar__hash {

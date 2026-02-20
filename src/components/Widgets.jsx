@@ -5,16 +5,23 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 function Widgets() {
     const newsArticle = (heading, subtitle) => (
-        <div className="widgets__article">
-            <div className="widgets__articleLeft">
-                <FiberManualRecordIcon />
-            </div>
+        <a
+            href={`https://www.google.com/search?q=${encodeURIComponent(heading)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+            <div className="widgets__article">
+                <div className="widgets__articleLeft">
+                    <FiberManualRecordIcon />
+                </div>
 
-            <div className="widgets__articleRight">
-                <h4>{heading}</h4>
-                <p>{subtitle}</p>
+                <div className="widgets__articleRight">
+                    <h4>{heading}</h4>
+                    <p>{subtitle}</p>
+                </div>
             </div>
-        </div>
+        </a>
     );
 
     return (

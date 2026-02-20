@@ -15,6 +15,7 @@ import { useSearch } from '../context/SearchContext';
 function Feed() {
     const [posts, setPosts] = useState([]);
     const [input, setInput] = useState('');
+    const [photoInputUrl, setPhotoInputUrl] = useState('');
     const { currentUser } = useAuth();
     const { searchTerm } = useSearch();
 
@@ -85,9 +86,12 @@ function Feed() {
                 description: currentUser?.email || 'user@example.com',
                 message: input,
                 photoUrl: currentUser?.photoURL || '',
-                timestamp: serverTimestamp()
+                postImageUrl: photoInputUrl || '', // Store the attached image if any
+                timestamp: serverTimestamp(),
+                likes: []
             });
             setInput("");
+            setPhotoInputUrl("");
         } catch (error) {
             console.error("Error adding post: ", error);
             alert("Failed to send post. Check console.");
@@ -102,8 +106,11 @@ function Feed() {
             (description && description.toLowerCase().includes(term));
     });
 
-    const handleInputOptionClick = (type) => {
-        alert(`This would open the ${type} upload dialog. (Simulated)`);
+    const handlePhotoAdd = () => {
+        const url = prompt("Enter an Image URL to attach to your post:");
+        if (url) {
+            setPhotoInputUrl(url);
+        }
     };
 
     return (
@@ -117,15 +124,13 @@ function Feed() {
                     </form>
                 </div>
                 <div className="feed__inputOptions">
-                    <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" onClick={() => handleInputOptionClick('Photo')} />
-                    <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" onClick={() => handleInputOptionClick('Video')} />
-                    <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" onClick={() => handleInputOptionClick('Event')} />
-                    <InputOption Icon={CalendarViewDayIcon} title="Write article" color="#7FC15E" onClick={() => handleInputOptionClick('Article')} />
+                    <InputOption Icon={ImageIcon} title="Add Image URL" color="#70B5F9" onClick={handlePhotoAdd} />
+                    {photoInputUrl && <span style={{ fontSize: '12px', color: 'green', marginLeft: '10px' }}>Image Attached! ✓</span>}
                 </div>
             </div>
 
             {/* Posts */}
-            {filteredPosts.map(({ id, data: { name, description, message, photoUrl, likes } }) => (
+            {filteredPosts.map(({ id, data: { name, description, message, photoUrl, postImageUrl, likes } }) => (
                 <Post
                     key={id}
                     id={id}
@@ -133,6 +138,7 @@ function Feed() {
                     description={description}
                     message={message}
                     photoUrl={photoUrl}
+                    postImageUrl={postImageUrl}
                     likes={likes || []}
                 />
             ))}

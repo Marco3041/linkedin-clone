@@ -12,7 +12,7 @@ import { db } from '../firebase';
 import { doc, updateDoc, arrayUnion, arrayRemove, collection, onSnapshot, addDoc, query, orderBy, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 
-const Post = forwardRef(({ id, name, description, message, photoUrl, likes = [] }, ref) => {
+const Post = forwardRef(({ id, name, description, message, photoUrl, postImageUrl, likes = [] }, ref) => {
     const { currentUser } = useAuth();
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState([]);
@@ -93,6 +93,13 @@ const Post = forwardRef(({ id, name, description, message, photoUrl, likes = [] 
 
             <div className="post__body">
                 <p>{message}</p>
+                {postImageUrl && (
+                    <img
+                        src={postImageUrl}
+                        alt="Post attachment"
+                        style={{ width: '100%', borderRadius: '10px', marginTop: '10px', objectFit: 'contain', maxHeight: '500px' }}
+                    />
+                )}
             </div>
 
             <div className="post__buttons">
