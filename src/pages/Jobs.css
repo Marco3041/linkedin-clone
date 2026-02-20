@@ -1,0 +1,68 @@
+.jobs {
+    flex: 0.8;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.jobs__header {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    margin-bottom: 20px;
+}
+
+.jobs__header>p {
+    color: gray;
+    font-size: 14px;
+}
+
+.jobs__list {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.jobs__listing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid whitesmoke;
+    cursor: pointer;
+}
+
+.jobs__listing:hover {
+    background-color: whitesmoke;
+}
+
+.jobs__listingInfo>h3 {
+    font-size: 16px;
+    color: #0a66c2;
+}
+
+.jobs__listingInfo>p {
+    font-size: 14px;
+    color: black;
+}
+
+.jobs__location {
+    font-size: 12px !important;
+    color: gray !important;
+    margin-top: 5px;
+}
+
+.jobs__listing>button {
+    background-color: #0a66c2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.jobs__listing>button:hover {
+    background-color: #004182;
+}

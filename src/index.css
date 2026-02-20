@@ -1,0 +1,46 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light Mode (Default) */
+  --bg-color: #f3f2ef;
+  --component-bg: white;
+  --text-color: black;
+  --text-secondary: gray;
+  --border-color: lightgray;
+  --icon-color: gray;
+  --input-bg: white;
+  --hover-color: whitesmoke;
+}
+
+body.dark {
+  /* Dark Mode Overrides */
+  --bg-color: #000000;
+  --component-bg: #1d2226;
+  --text-color: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #444;
+  --icon-color: #ffffff;
+  --input-bg: #1d2226;
+  --hover-color: #444;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
