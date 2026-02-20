@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from '../firebase';
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,12 @@ function Login() {
     const loginToApp = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-            .then(userAuth => {
+            .then(async (userAuth) => {
+                if (!userAuth.user.emailVerified) {
+                    await signOut(auth);
+                    alert("Please verify your email address before logging in. Check your inbox.");
+                    return;
+                }
                 navigate('/');
             })
             .catch(error => alert(error));
@@ -42,9 +47,13 @@ function Login() {
                     connections: []
                 }, { merge: true });
 
-                navigate('/');
+                await sendEmailVerification(userAuth.user);
+                await signOut(auth); // Force them to log in after verifying
+
+                alert("Account created! Please check your email to verify your account before logging in.");
+                setIsRegistering(false); // Switch back to login view
             })
-            .catch(error => alert(error));
+            .catch(error => alert(error.message));
     };
 
     return (
